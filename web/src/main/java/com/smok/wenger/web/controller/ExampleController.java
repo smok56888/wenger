@@ -1,4 +1,4 @@
-package controller;
+package com.smok.wenger.web.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
