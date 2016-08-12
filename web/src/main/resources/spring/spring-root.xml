@@ -12,7 +12,7 @@
         <context:exclude-filter type="annotation" expression="org.springframework.web.bind.annotation.ControllerAdvice"/>
     </context:component-scan>
 
-    <bean id="propertyConfigurer" class="com.smok.wenger.web.common.MultiModeConfigurer">
+    <bean id="propertyConfigurer" class="com.smok.wenger.common.MultiModeConfigurer">
         <property name="locations">
             <list>
                 <value>classpath:/config/${profile}/jdbc.properties</value>

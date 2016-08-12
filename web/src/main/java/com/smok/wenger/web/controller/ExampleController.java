@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * Created by smok.laf on 2016/8/1 17:50
  */
 @Controller
-@RequestMapping("/example/*")
+@RequestMapping("/web/example/*")
 public class ExampleController {
 
   @RequestMapping("/normal")

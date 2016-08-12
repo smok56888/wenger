@@ -1,13 +1,7 @@
 package com.smok.wenger.exception;
 
-import org.springframework.beans.TypeMismatchException;
 import org.springframework.context.MessageSource;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.springframework.validation.BindException;
-import org.springframework.web.HttpMediaTypeNotAcceptableException;
-import org.springframework.web.HttpRequestMethodNotSupportedException;
-import org.springframework.web.bind.MissingServletRequestParameterException;
-import org.springframework.web.multipart.MultipartException;
 
 import java.util.Locale;
 
@@ -60,17 +54,6 @@ public class CommonException extends RuntimeException {
   public static CommonException wrapIfNeeded(Throwable exception, String details) {
     if (exception instanceof CommonException) {
       return (CommonException) exception;
-    } else if (exception instanceof BindException || exception instanceof TypeMismatchException
-        || exception instanceof MissingServletRequestParameterException) {
-      return INVALID_PARAMETER(exception, "", details);
-    } else if (exception instanceof IllegalArgumentException) {
-      return INVALID_PARAMETER(exception, "", details);
-    } else if (exception instanceof MultipartException) {
-      return NOT_ALLOWED("session timeout,so 302 and login again!");
-    } else if (exception instanceof HttpMediaTypeNotAcceptableException) {
-      return NOT_ALLOWED("http upload post 406 error!");
-    } else if (exception instanceof HttpRequestMethodNotSupportedException) {
-      return NOT_ALLOWED("请求方法头不合法，请刷新后重试，給您带来的不便请原谅");
     } else {
       return INTERNAL(exception, details);
     }

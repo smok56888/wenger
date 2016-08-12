@@ -30,6 +30,12 @@
         <commons-io.version>2.4</commons-io.version>
         <commons-collections.version>3.2.1</commons-collections.version>
         <commons-codec.version>1.10</commons-codec.version>
+        <tomcat.version>7.0.61</tomcat.version>
+        <slf4j.version>1.7.21</slf4j.version>
+        <log4j.version>1.2.17</log4j.version>
+        <logback.version>1.1.7</logback.version>
+        <logback-ext-spring.version>0.1.4</logback-ext-spring.version>
+        <mysql.version>6.0.2</mysql.version>
     </properties>
 
     <dependencyManagement>
@@ -133,12 +139,12 @@
             <dependency>
                 <groupId>org.apache.tomcat</groupId>
                 <artifactId>tomcat-servlet-api</artifactId>
-                <version>7.0.61</version>
+                <version>${tomcat.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.apache.tomcat</groupId>
                 <artifactId>tomcat-jsp-api</artifactId>
-                <version>7.0.61</version>
+                <version>${tomcat.version}</version>
             </dependency>
             <dependency>
                 <groupId>javax.servlet</groupId>
@@ -161,7 +167,7 @@
             </dependency>
             <!-- common end -->
 
-            <!-- spring aop -->
+            <!-- spring aop start  -->
             <dependency>
                 <groupId>org.aspectj</groupId>
                 <artifactId>aspectjrt</artifactId>
@@ -172,6 +178,7 @@
                 <artifactId>aspectjweaver</artifactId>
                 <version>${aspectj.version}</version>
             </dependency>
+            <!-- spring aop end -->
 
             <!-- json begin -->
             <dependency>
@@ -200,6 +207,42 @@
                 <version>${fastjson.version}</version>
             </dependency>
             <!-- json end -->
+
+            <!-- log start -->
+            <dependency>
+                <groupId>log4j</groupId>
+                <artifactId>log4j</artifactId>
+                <version>${log4j.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-api</artifactId>
+                <version>${slf4j.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>ch.qos.logback</groupId>
+                <artifactId>logback-core</artifactId>
+                <version>${logback.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>ch.qos.logback</groupId>
+                <artifactId>logback-classic</artifactId>
+                <version>${logback.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.logback-extensions</groupId>
+                <artifactId>logback-ext-spring</artifactId>
+                <version>${logback-ext-spring.version}</version>
+            </dependency>
+            <!-- log end -->
+
+            <!-- persistence begin -->
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>${mysql.version}</version>
+            </dependency>
+            <!-- persistence end -->
         </dependencies>
     </dependencyManagement>
 

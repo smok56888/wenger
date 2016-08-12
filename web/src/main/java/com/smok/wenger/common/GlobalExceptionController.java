@@ -1,8 +1,10 @@
-package com.smok.wenger.web.common;
+package com.smok.wenger.common;
 
 import com.smok.wenger.exception.CommonException;
 import com.smok.wenger.vo.WebResponse;
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -14,6 +16,8 @@ import javax.servlet.http.HttpServletRequest;
  */
 @ControllerAdvice
 public class GlobalExceptionController {
+
+  private static final Logger LOG = LoggerFactory.getLogger(GlobalExceptionController.class);
 
   @ExceptionHandler(Exception.class)
   @ResponseBody
@@ -28,8 +32,6 @@ public class GlobalExceptionController {
       // TODO 自定义异常捕获&处理逻辑
       return WebResponse.error(commonException.getMessage());
     }
-
-    // TODO 非捕获异常处理逻辑 报警？！
     return WebResponse.error("内部错误，请稍后再试，给您带来的不便请原谅。");
   }
 }

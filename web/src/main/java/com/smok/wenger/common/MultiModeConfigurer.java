@@ -1,4 +1,4 @@
-package com.smok.wenger.web.common;
+package com.smok.wenger.common;
 
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 
