@@ -12,7 +12,7 @@ public class MultiModeConfigurer extends PropertySourcesPlaceholderConfigurer {
 
   static {
     String argName = "profile";
-    String devConf = "config/dev";
+    String devConf = "dev";
     String profile = System.getProperty(argName);
     if (profile == null) {
       profile = devConf;

@@ -15,7 +15,14 @@ public class ExampleController {
 
   @RequestMapping("/normal")
   @ResponseBody
-  public Object normalReturn() {
+  public WebResponse normalReturn() {
     return WebResponse.success();
+  }
+
+  @RequestMapping("/exception")
+  @ResponseBody
+  public WebResponse exceptionReturn() {
+    Object o = null;
+    return WebResponse.success(o.hashCode());
   }
 }
