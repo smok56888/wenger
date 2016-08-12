@@ -1,5 +1,6 @@
 package com.smok.wenger.web.controller;
 
+import com.smok.wenger.vo.WebResponse;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -15,6 +16,6 @@ public class ExampleController {
   @RequestMapping("/normal")
   @ResponseBody
   public Object normalReturn() {
-    return null;
+    return WebResponse.success();
   }
 }

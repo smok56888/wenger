@@ -12,16 +12,15 @@
         <context:exclude-filter type="annotation" expression="org.springframework.web.bind.annotation.ControllerAdvice"/>
     </context:component-scan>
 
-    <bean id="propertyConfigurer" class="com.smok.wenger.util.MultiModeConfigurer">
+    <bean id="propertyConfigurer" class="com.smok.wenger.web.common.MultiModeConfigurer">
         <property name="locations">
             <list>
-                <value>classpath:${profile}/jdbc.properties</value>
-                <value>classpath:${profile}/hessian.properties</value>
-                <value>classpath:${profile}/huichuan-web.properties</value>
-                <value>classpath:${profile}/service-location.properties</value>
+                <value>classpath:/${profile}/jdbc.properties</value>
+                <value>classpath:/${profile}/wenger-web.properties</value>
             </list>
         </property>
     </bean>
 
     <import resource="classpath*:/spring/spring-mvc.xml"/>
+    <import resource="classpath*:/spring/spring-datasource.xml"/>
 </beans>

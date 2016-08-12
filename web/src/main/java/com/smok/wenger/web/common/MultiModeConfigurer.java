@@ -1,4 +1,4 @@
-package com.smok.wenger.util;
+package com.smok.wenger.web.common;
 
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 
@@ -12,7 +12,7 @@ public class MultiModeConfigurer extends PropertySourcesPlaceholderConfigurer {
 
   static {
     String argName = "profile";
-    String devConf = "dev";
+    String devConf = "config/dev";
     String profile = System.getProperty(argName);
     if (profile == null) {
       profile = devConf;
