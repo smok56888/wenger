@@ -72,7 +72,7 @@
             <artifactId>spring-test</artifactId>
             <scope>test</scope>
         </dependency>
-        <!-- config.test end -->
+        <!-- test end -->
 
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
@@ -96,5 +96,25 @@
             <artifactId>slf4j-api</artifactId>
         </dependency>
     </dependencies>
+
+    <build>
+        <plugins>
+            <!-- compiler插件, 设定JDK版本 -->
+            <!--<plugin>-->
+                <!--<groupId>org.apache.maven.plugins</groupId>-->
+                <!--<artifactId>maven-compiler-plugin</artifactId>-->
+            <!--</plugin>-->
+
+            <!-- war打包插件, 设定war包名称不带版本号 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <configuration>
+                    <warName>${project.artifactId}</warName>
+                </configuration>
+            </plugin>
+
+        </plugins>
+    </build>
 
 </project>
