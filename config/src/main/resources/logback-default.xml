@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<included>
+    <!-- 尝试获取catalina.home，在tomcat启动脚本中默认就会设置 -->
+    <if condition='!isNull("catalina.home")'>
+        <then>
+            <property name="LOG_HOME" value="${catalina.home}/logs/wenger" />
+        </then>
+        <else>
+            <property name="LOG_HOME" value="../logs/wenger" />
+        </else>
+    </if>
+
+    <!-- 默认日志输出，每天一个文件 -->
+    <appender name="defaultLogFile" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_HOME}/default.log</file>
+
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_HOME}/default.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <!-- 保留 30天数据，默认无限-->
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+
+        <encoder>
+            <pattern>%date{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- 每天生成日志文件，不包含FATAL -->
+    <appender name="rollingLogFile" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_HOME}/biz.log</file>
+
+        <filter class="ch.qos.logback.core.filter.EvaluatorFilter">
+            <evaluator class="ch.qos.logback.classic.boolex.OnMarkerEvaluator">
+                <marker>FATAL</marker>
+            </evaluator>
+            <onMatch>DENY</onMatch>
+            <onMismatch>ACCEPT</onMismatch>
+        </filter>
+
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!--日志文件输出的文件名 -->
+            <FileNamePattern>${LOG_HOME}/biz.%d{yyyy-MM-dd}.log</FileNamePattern>
+            <!--日志文件保留天数 -->
+            <MaxHistory>30</MaxHistory>
+        </rollingPolicy>
+        <!--日志文件最大的大小 -->
+        <!--
+        <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+          <MaxFileSize>20MB</MaxFileSize>
+        </triggeringPolicy>
+        -->
+
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- 仅记录fatal日志 -->
+    <appender name="fatalLogFile" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_HOME}/wenger.FATAL</file>
+
+        <filter class="ch.qos.logback.core.filter.EvaluatorFilter">
+            <evaluator class="ch.qos.logback.classic.boolex.OnMarkerEvaluator">
+                <marker>FATAL</marker>
+            </evaluator>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_HOME}/wenger.FATAL.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <!-- 保留 30天数据，默认无限-->
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+
+        <encoder>
+            <pattern>%date{HH:mm:ss.SSS} [%thread] %-5marker %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- 默认信息输出到defaultLogFile，业务信息都输出到rollingLogFile，因此additivity=false，表示不继承root -->
+    <logger name="com.smok" level="INFO" additivity="false">
+        <appender-ref ref="rollingLogFile" />
+        <appender-ref ref="fatalLogFile" />
+    </logger>
+    <logger name="com.wolong" level="INFO" additivity="false">
+        <appender-ref ref="rollingLogFile" />
+        <appender-ref ref="fatalLogFile" />
+    </logger>
+
+    <root level="INFO">
+        <appender-ref ref="defaultLogFile" />
+    </root>
+</included>
